@@ -2927,7 +2927,12 @@ input, textarea, select, button {
   width:120px;
   height:120px;
   border-radius:28px;
-  object-fit:cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:64px;
+  line-height:1;
+  background:linear-gradient(135deg,#FFE1E6,#B5FFFC);
   opacity:0;
   transform:scale(.7);
   animation:splashImgIn .9s .2s cubic-bezier(.22,1.5,.36,1) forwards;
@@ -2961,6 +2966,185 @@ input, textarea, select, button {
   100%{opacity:1;transform:translateY(0);}
 }
 @keyframes wxBannerIn{from{opacity:0;transform:translateY(-100%);}to{opacity:1;transform:translateY(0);}}
+
+/* ============ 红包详情页 ============ */
+.redpacket-detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9600;
+  background: rgba(20,5,0,.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.redpacket-detail-overlay.active { display: flex; }
+
+.rp-detail-card {
+  width: 100%;
+  max-width: 360px;
+  max-height: 82vh;
+  background: linear-gradient(180deg,#C7302A 0%,#A61F17 100%);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  animation: rpDetailIn .45s cubic-bezier(.22,1.5,.36,1);
+}
+@keyframes rpDetailIn {
+  from { opacity: 0; transform: scale(.88) translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.rp-detail-header {
+  padding: 22px 20px 16px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.rp-detail-sender {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rp-detail-avatar {
+  width: 46px; height: 46px;
+  border-radius: 11px;
+  flex-shrink: 0;
+  background: #ccc center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+.rp-detail-sender-info { flex: 1; min-width: 0; }
+.rp-detail-sender-name {
+  font-size: 15.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rp-detail-blessing {
+  font-size: 12.5px;
+  opacity: .85;
+  margin-top: 4px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+.rp-detail-summary {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.15);
+  font-size: 12.5px;
+  opacity: .88;
+  font-variant-numeric: tabular-nums;
+}
+
+.rp-detail-list {
+  flex: 1;
+  min-height: 80px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rp-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+}
+.rp-detail-item-avatar {
+  width: 40px; height: 40px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+}
+.rp-detail-item-info { flex: 1; min-width: 0; }
+.rp-detail-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1c1c1e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rp-detail-item-name .rp-lucky {
+  font-size: 10px;
+  color: #B7271F;
+  background: linear-gradient(180deg,#FFE066,#FFC107);
+  padding: 2px 7px;
+  border-radius: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: .2px;
+}
+.rp-detail-item-time {
+  font-size: 11px;
+  color: #b0b0b0;
+  margin-top: 3px;
+}
+.rp-detail-item-amount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1c1e;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.rp-detail-item-amount.lucky { color: #B7271F; }
+
+.rp-detail-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: #999;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.rp-detail-footer {
+  padding: 12px 20px calc(14px + env(safe-area-inset-bottom));
+  background: #A61F17;
+  flex-shrink: 0;
+}
+.rp-detail-close {
+  width: 100%;
+  padding: 13px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: transparent;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s;
+}
+.rp-detail-close:active { background: rgba(255,255,255,.12); }
+
+/* 暗色 */
+[data-theme="dark"] .rp-detail-list { background: #1c1c1e; }
+[data-theme="dark"] .rp-detail-item-name { color: #f2f2f7; }
+[data-theme="dark"] .rp-detail-item-amount { color: #f2f2f7; }
+[data-theme="dark"] .rp-detail-item-amount.lucky { color: #FFD700; }
+[data-theme="dark"] .rp-detail-item-time { color: #636366; }
 </style>
 </head>
 <body>
@@ -2989,7 +3173,7 @@ input, textarea, select, button {
   </div>
 </div>
 <div id="bootSplash">
-  <img class="splash-img" id="bootSplashImg" src="/image/icon-512.png" alt="">
+  <div class="splash-img" id="bootSplashImg">🍥</div>
   <div class="splash-title">鱼丸机</div>
   <div class="splash-dev">开发者 宝宝鱼</div>
 </div>
@@ -4892,6 +5076,14 @@ function updateRealtimeUI() {
   var cm = document.getElementById('widgetCalMonth'); if (cm) cm.textContent = MONTHS[now.getMonth()];
   var cd = document.getElementById('widgetCalDay'); if (cd) cd.textContent = now.getDate();
   var cw = document.getElementById('widgetCalWeek'); if (cw) cw.textContent = WEEKDAYS[now.getDay()];
+  // ★ 新增：同步「时钟工作室」预览
+  var cspT = document.getElementById('cspTime');
+  if (cspT) cspT.textContent = hh + ':' + mm;
+  var cspD = document.getElementById('cspDate');
+  if (cspD) {
+    var wdArr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+    cspD.textContent = (now.getMonth() + 1) + '月' + now.getDate() + '日 ' + wdArr[now.getDay()];
+  }
   updateLockTime();
 }
 function updateWbWidget() { var el = document.getElementById('widgetWbCount'); if (el) el.textContent = worldbookData.filter(function (e) { return e.enabled; }).length; }
@@ -7217,12 +7409,153 @@ function renderRedpacketCard(m) {
   '</div>';
 }
 
-/* ---------- 打开红包界面 ---------- */
+/* ---------- 红包领取详情 ---------- */
+window.showRedpacketDetail = function (msgId) {
+  if (!currentChat) return;
+  var msgs = getActiveMessages(currentChat);
+  var m = msgs.find(function (x) { return x.id === msgId; });
+  if (!m || m.type !== 'redpacket') return;
+
+  var overlay = document.getElementById('redpacketDetailOverlay');
+  if (!overlay) return;
+
+  /* --- 发送者信息 --- */
+  var senderName, avatarHtml;
+  if (m.sender === 'self') {
+    senderName = myProfile.name || '我';
+    if (myProfile.avatar) {
+      avatarHtml = '<div class="rp-detail-avatar" style="background-image:url(' + myProfile.avatar + ');"></div>';
+    } else {
+      avatarHtml = '<div class="rp-detail-avatar" style="background:linear-gradient(135deg,#8E5CE6,#5E5CE6);">' + escapeHtml(senderName.charAt(0)) + '</div>';
+    }
+  } else {
+    var senderCt = contactsData[m.sender];
+    senderName = (senderCt && senderCt.name) || m.senderName || '好友';
+    if (senderCt && senderCt.avatar) {
+      avatarHtml = '<div class="rp-detail-avatar" style="background-image:url(' + senderCt.avatar + ');"></div>';
+    } else if (senderCt) {
+      avatarHtml = '<div class="rp-detail-avatar" style="background:' + (senderCt.avatarBg || 'linear-gradient(135deg,#8E5CE6,#5E5CE6)') + ';">' + escapeHtml(senderCt.avatarEmoji || senderName.charAt(0)) + '</div>';
+    } else {
+      avatarHtml = '<div class="rp-detail-avatar" style="background:#ccc;">?</div>';
+    }
+  }
+  overlay.querySelector('.rp-detail-sender').innerHTML =
+    avatarHtml +
+    '<div class="rp-detail-sender-info">' +
+      '<div class="rp-detail-sender-name">' + escapeHtml(senderName) + '</div>' +
+      '<div class="rp-detail-blessing">' + escapeHtml(m.note || '恭喜发财，大吉大利') + '</div>' +
+    '</div>';
+
+  /* --- 汇总 --- */
+  var claimed = m.claimed || [];
+  var claimedAmt = claimed.reduce(function (s, c) { return s + (Number(c.amount) || 0); }, 0);
+  var totalAmt = Number(m.amount) || 0;
+  var totalCnt = m.count || 1;
+  var claimedCnt = claimed.length;
+  var isDone = (m.remainingCount || 0) <= 0;
+
+  var summary;
+  if (isDone) {
+    summary = '已领取 ' + claimedCnt + '/' + totalCnt + ' 个 · 共 ¥' + claimedAmt.toFixed(2) + ' · 红包已领完';
+  } else {
+    summary = '已领取 ' + claimedCnt + '/' + totalCnt + ' 个 · 已领 ¥' + claimedAmt.toFixed(2) + ' / 总额 ¥' + totalAmt.toFixed(2);
+  }
+  overlay.querySelector('.rp-detail-summary').textContent = summary;
+
+  /* --- 领取列表 --- */
+  var listEl = overlay.querySelector('.rp-detail-list');
+  if (claimed.length === 0) {
+    listEl.innerHTML = '<div class="rp-detail-empty">还没有人领取<br>快让朋友来抢吧~</div>';
+    overlay.classList.add('active');
+    return;
+  }
+
+  // 找手气最佳（金额最高，仅当 >=2 人时标记）
+  var maxAmt = -1, luckyIdx = -1;
+  claimed.forEach(function (c, i) {
+    var a = Number(c.amount) || 0;
+    if (a > maxAmt) { maxAmt = a; luckyIdx = i; }
+  });
+  var showLucky = claimed.length > 1;
+
+  // 手气最佳置顶，其他按时间倒序
+  var sorted = claimed.slice().sort(function (a, b) {
+    var aL = (showLucky && a === claimed[luckyIdx]) ? 1 : 0;
+    var bL = (showLucky && b === claimed[luckyIdx]) ? 1 : 0;
+    if (aL !== bL) return bL - aL;
+    return (b.ts || 0) - (a.ts || 0);
+  });
+
+  var h = '';
+  sorted.forEach(function (c) {
+    var isLucky = showLucky && (c === claimed[luckyIdx]);
+
+    var av;
+    if (c.who === 'self') {
+      if (myProfile.avatar) {
+        av = '<div class="rp-detail-item-avatar" style="background-image:url(' + myProfile.avatar + ');"></div>';
+      } else {
+        av = '<div class="rp-detail-item-avatar" style="background:linear-gradient(135deg,#8E5CE6,#5E5CE6);">' + escapeHtml((myProfile.name || '我').charAt(0)) + '</div>';
+      }
+    } else {
+      var ct2 = contactsData[c.who];
+      if (ct2 && ct2.avatar) {
+        av = '<div class="rp-detail-item-avatar" style="background-image:url(' + ct2.avatar + ');"></div>';
+      } else if (ct2) {
+        av = '<div class="rp-detail-item-avatar" style="background:' + (ct2.avatarBg || 'linear-gradient(135deg,#8E5CE6,#5E5CE6)') + ';">' + escapeHtml(ct2.avatarEmoji || (ct2.name || '?').charAt(0)) + '</div>';
+      } else {
+        av = '<div class="rp-detail-item-avatar" style="background:#ccc;">?</div>';
+      }
+    }
+
+    var nameHtml = escapeHtml(c.name || '未知') +
+      (isLucky ? '<span class="rp-lucky">👑 手气最佳</span>' : '');
+
+    h += '<div class="rp-detail-item">' +
+      av +
+      '<div class="rp-detail-item-info">' +
+        '<div class="rp-detail-item-name">' + nameHtml + '</div>' +
+        '<div class="rp-detail-item-time">' + formatRpTime(c.ts) + '</div>' +
+      '</div>' +
+      '<div class="rp-detail-item-amount' + (isLucky ? ' lucky' : '') + '">¥' + Number(c.amount).toFixed(2) + '</div>' +
+    '</div>';
+  });
+  listEl.innerHTML = h;
+
+  overlay.classList.add('active');
+};
+
+function formatRpTime(ts) {
+  if (!ts) return '';
+  var d = new Date(ts);
+  var now = new Date();
+  var hh = (d.getHours() < 10 ? '0' : '') + d.getHours();
+  var mm = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+  if (d.toDateString() === now.toDateString()) return '今天 ' + hh + ':' + mm;
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日 ' + hh + ':' + mm;
+}
+
+window.closeRedpacketDetail = function () {
+  var overlay = document.getElementById('redpacketDetailOverlay');
+  if (overlay) overlay.classList.remove('active');
+};
+
 window.openRedpacketDetail = function (msgId) {
   if (!currentChat) return;
   var msgs = getActiveMessages(currentChat);
   var m = msgs.find(function (x) { return x.id === msgId; });
   if (!m || m.type !== 'redpacket') return;
+
+  var myClaim = m.claimed ? m.claimed.find(function (c) { return c.who === 'self'; }) : null;
+  var done = (m.remainingCount || 0) <= 0;
+
+  // 自己发的 / 已领过 / 已领完 → 直接看详情
+  if (m.sender === 'self' || myClaim || done) {
+    showRedpacketDetail(msgId);
+    return;
+  }
+
+  // 否则进入开红包流程
   var overlay = document.getElementById('redpacketOverlay');
   overlay.dataset.msgId = msgId;
   var fromEl = document.getElementById('rpFrom');
@@ -7236,12 +7569,6 @@ window.openRedpacketDetail = function (msgId) {
   btn.style.display = 'flex';
   result.classList.remove('show');
   overlay.classList.add('active');
-};
-
-window.closeRedpacketOverlay = function () {
-  var overlay = document.getElementById('redpacketOverlay');
-  if (overlay) overlay.classList.remove('active');
-  if (currentChat) { try { renderMessages(); } catch (e) {} }
 };
 
 /* ---------- 领取红包 ---------- */
@@ -7293,9 +7620,21 @@ function showRedpacketResult(amount, label) {
   amtEl.textContent = Number(amount).toFixed(2);
   lblEl.textContent = label || '已存入零钱';
   result.classList.add('show');
+
+  var msgId = document.getElementById('redpacketOverlay').dataset.msgId;
+
   setTimeout(function () {
     closeRedpacketOverlay();
     if (currentChat) { renderMessages(); renderChatList(); }
+    // 领完后 900ms 自动弹详情（看谁手气最佳）
+    if (msgId) {
+      setTimeout(function () {
+        if (!currentChat) return;
+        var op = document.getElementById('redpacketOverlay');
+        if (op && op.classList.contains('active')) return;
+        showRedpacketDetail(msgId);
+      }, 900);
+    }
   }, 2800);
 }
 
@@ -7358,56 +7697,171 @@ window.confirmSendRedpacket = function () {
   maybeAiClaimRedpacket(cid, rpMsg.id);
 };
 
-/* ---------- AI 抢红包 ---------- */
+/* ---------- API 生成抢红包感谢语 ---------- */
+async function generateRedpacketThanks(cid, claimerId, amt, isLucky, rpNote) {
+  var bu = '', ak = '', md = '';
+  try {
+    bu = document.getElementById('aiBaseUrl').value.trim().replace(/\/+$/, '');
+    ak = document.getElementById('aiApiKey').value.trim();
+    md = document.getElementById('aiModel').value.trim();
+  } catch (e) { return null; }
+  if (!bu || !ak || !md) return null;
+
+  var ct = contactsData[cid];
+  var claimerCt = contactsData[claimerId];
+  var card = (claimerCt && claimerCt._cardId)
+    ? characterCards.find(function (c) { return c.id === claimerCt._cardId; })
+    : null;
+
+  /* --- 构造 system prompt --- */
+  var sys = '你正在一个微信群聊里，你的名字叫「' + (claimerCt ? claimerCt.name : '某人') + '」。\n';
+  sys += '当前时间：' + getCurrentTimeText() + '。\n';
+  if (card) {
+    if (card.personality) sys += '你的性格：' + card.personality + '。\n';
+    if (card.description) sys += '你的背景：' + card.description.substring(0, 150) + '。\n';
+  }
+  try { var ub = buildUserPersonaBlock(); if (ub) sys += ub; } catch (e) {}
+  sys += '【群成员】' + (ct && ct.isGroup
+    ? ct.members.map(function (mid) { var c = contactsData[mid]; return c ? c.name : ''; }).filter(Boolean).join('、')
+    : '') + '\n';
+
+  /* --- user prompt --- */
+  var user = '群里有人发了个红包（' + (rpNote || '恭喜发财，大吉大利') + '）。\n';
+  user += '你刚抢到了 ¥' + amt.toFixed(2) + '。\n';
+  if (isLucky) user += '（你是全场手气最佳！可以稍微炫耀一下）\n';
+  user += '\n请用符合你人设的语气，在群里发一句自然的感谢/反应，10~20字。\n';
+  user += '【铁律】绝对禁止心理活动、旁白、括号动作、引号。只输出纯文本对话。\n';
+  user += '不要加"XXX："前缀、不要 @ 任何人。';
+
+  try {
+    var r = await fetch(bu + '/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + ak
+      },
+      body: JSON.stringify({
+        model: md,
+        messages: [
+          { role: 'system', content: sys },
+          { role: 'user', content: user }
+        ],
+        temperature: 0.95,
+        max_tokens: 60
+      })
+    });
+    var d = await r.json();
+    var text = d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content;
+    if (!text) return null;
+    var clean = cleanAIReply(text);
+    if (!clean) return null;
+    if (clean.length > 28) clean = clean.substring(0, 28);
+    return clean;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* ---------- AI 抢红包（多人版） ---------- */
 function maybeAiClaimRedpacket(cid, msgId) {
-  setTimeout(function () {
-    if (!contactsData[cid]) return;
-    var msgs = getActiveMessages(cid);
-    var m = msgs.find(function (x) { return x.id === msgId; });
-    if (!m || m.type !== 'redpacket') return;
-    if ((m.remainingCount || 0) <= 0) return;
+  var ct = contactsData[cid];
+  if (!ct) return;
 
-    var ct = contactsData[cid];
-    var claimerId, claimerName;
-    if (ct.isGroup && ct.members && ct.members.length > 0) {
-      claimerId = ct.members[Math.floor(Math.random() * ct.members.length)];
-      var claimerCt = contactsData[claimerId];
-      claimerName = claimerCt ? claimerCt.name : '某人';
-    } else {
-      claimerId = cid;
-      claimerName = ct.name;
+  // 1. 确定候选领取人
+  var candidates;
+  if (ct.isGroup && ct.members && ct.members.length > 0) {
+    candidates = ct.members.slice();
+    // 打乱顺序（群里抢红包本来就是随机的）
+    for (var i = candidates.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = candidates[i]; candidates[i] = candidates[j]; candidates[j] = t;
     }
-    if (!m.claimed) m.claimed = [];
-    if (m.claimed.find(function (c) { return c.who === claimerId; })) return;
-    if ((m.remainingCount || 0) <= 0) return;
+  } else {
+    // 私聊：只有一个对象会抢
+    candidates = [cid];
+  }
 
-    var amt = randomRedpacketAmount(m.remaining, m.remainingCount);
-    m.remaining = Math.round((m.remaining - amt) * 100) / 100;
-    m.remainingCount = (m.remainingCount || 0) - 1;
-    m.claimed.push({ who: claimerId, name: claimerName, amount: amt, ts: Date.now() });
-    if (m.remainingCount <= 0) m.status = 'done';
+  // 2. 为每个候选人安排一次「抢红包」动作
+  //    - 群聊：85% 概率来抢（有人就是不看手机）
+  //    - 私聊：必定来抢
+  //    - 延迟错开，营造"手速不同"的感觉
+  candidates.forEach(function (claimerId, idx) {
+    if (ct.isGroup && Math.random() > 0.85) return;
 
-    setActiveMessages(cid, msgs);
+    var delay = 1500
+              + idx * (450 + Math.random() * 900)   // 依次错峰
+              + Math.random() * 700;                 // 加点噪声
+
+    setTimeout(function () { aiClaimOne(cid, msgId, claimerId); }, delay);
+  });
+}
+
+/* ---------- 单个成员抢一次红包 ---------- */
+function aiClaimOne(cid, msgId, claimerId) {
+  if (!contactsData[cid]) return;
+  var msgs = getActiveMessages(cid);
+  var m = msgs.find(function (x) { return x.id === msgId; });
+  if (!m || m.type !== 'redpacket') return;
+
+  // 抢完了 / 已领过 → 安静退出（模拟"手慢了没抢到"）
+  if ((m.remainingCount || 0) <= 0) return;
+  if (!m.claimed) m.claimed = [];
+  if (m.claimed.find(function (c) { return c.who === claimerId; })) return;
+
+  var ct = contactsData[cid];
+  var claimerCt = contactsData[claimerId];
+  var claimerName = (claimerCt && claimerCt.name) || ct.name || '某人';
+
+  // 分一份红包（沿用二倍均值算法，金额自然有大小差异）
+  var amt = randomRedpacketAmount(m.remaining, m.remainingCount);
+  m.remaining = Math.round((m.remaining - amt) * 100) / 100;
+  m.remainingCount = (m.remainingCount || 0) - 1;
+  m.claimed.push({ who: claimerId, name: claimerName, amount: amt, ts: Date.now() });
+  if (m.remainingCount <= 0) m.status = 'done';
+
+  setActiveMessages(cid, msgs);
+  if (currentChat === cid) renderMessages();
+  AutoCache.scheduleSave();
+
+  // 追一条感谢消息（API生成 + 降级模板）
+  setTimeout(async function () {
+    if (!contactsData[cid]) return;
+
+    // 判断是否手气最佳
+    var isLucky = false;
+    if (m.claimed && m.claimed.length > 1) {
+      var maxA = 0;
+      m.claimed.forEach(function (x) { var v = Number(x.amount) || 0; if (v > maxA) maxA = v; });
+      isLucky = Math.abs(Number(amt) - maxA) < 0.001;
+    }
+
+    // 优先调用 API
+    var txt = null;
+    try {
+      txt = await generateRedpacketThanks(cid, claimerId, amt, isLucky, m.note);
+    } catch (e) { txt = null; }
+
+    // API 失败 → 降级到模板
+    if (!txt) {
+      var templates = isLucky
+        ? ['哈哈手气最佳！谢谢老板~', '承让承让，谢谢老板！', '运气爆棚，多谢老板~', '今天手气不错，谢谢老板！']
+        : ['谢谢老板~', '收到啦！', '感谢感谢', '哈哈哈抢到了', '老板大气！', '蟹蟹~', '手速还行！'];
+      txt = templates[Math.floor(Math.random() * templates.length)];
+    }
+
+    var curMsgs = getActiveMessages(cid);
+    curMsgs.push(ensureMessageId({
+      type: 'text', content: txt, sender: claimerId, time: getTime()
+    }));
+    setActiveMessages(cid, curMsgs);
     if (currentChat === cid) renderMessages();
+    if (activeApp !== 'wechat' || currentChat !== cid) {
+      contactsData[cid].unread = (contactsData[cid].unread || 0) + 1;
+      updateWechatBadge();
+    }
+    renderChatList();
     AutoCache.scheduleSave();
-
-    // 追加感谢消息
-    setTimeout(function () {
-      if (!contactsData[cid]) return;
-      var thanks = ['谢谢老板~', '收到啦！', '感谢感谢', '哈哈哈抢到了', '么么哒 ❤️', '老板大气！', '蟹蟹~'];
-      var txt = thanks[Math.floor(Math.random() * thanks.length)] + '（抢到 ¥' + amt.toFixed(2) + '）';
-      var curMsgs = getActiveMessages(cid);
-      curMsgs.push(ensureMessageId({ type: 'text', content: txt, sender: claimerId, time: getTime() }));
-      setActiveMessages(cid, curMsgs);
-      if (currentChat === cid) renderMessages();
-      if (activeApp !== 'wechat' || currentChat !== cid) {
-        contactsData[cid].unread = (contactsData[cid].unread || 0) + 1;
-        updateWechatBadge();
-      }
-      renderChatList();
-      AutoCache.scheduleSave();
-    }, 700 + Math.random() * 800);
-  }, 1800 + Math.random() * 3000);
+  }, 600 + Math.random() * 800);
 }
 
 /* ==================== 图片壁纸 / 图标 ==================== */
@@ -13948,6 +14402,20 @@ window.AlbumApp = AlbumApp;
 </div>
 
 
+
+<!-- 红包领取详情 -->
+<div class="redpacket-detail-overlay" id="redpacketDetailOverlay">
+  <div class="rp-detail-card">
+    <div class="rp-detail-header">
+      <div class="rp-detail-sender"></div>
+      <div class="rp-detail-summary"></div>
+    </div>
+    <div class="rp-detail-list"></div>
+    <div class="rp-detail-footer">
+      <button class="rp-detail-close" onclick="closeRedpacketDetail()">关闭</button>
+    </div>
+  </div>
+</div>
 <!-- 自定义组件：编辑器 -->
 <div class="modal-overlay" id="customWidgetEditorModal">
   <div class="modal-card" style="width:92%;max-height:90%;">
